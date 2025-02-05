@@ -1,4 +1,4 @@
-<?php $main_classes = ''; require 'componenti/header.php';?>
+<?php require 'componenti/header.php';?>
 
 <h1>Hello World</h1>
 

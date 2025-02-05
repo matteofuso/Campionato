@@ -1,7 +1,8 @@
 </main>
 <footer class="bg-body-tertiary text-white py-3 shadow-lg" data-bs-theme="dark">
-    <div class="container text-center">
-        <p>&copy; 2025 La Libreria. Tutti i diritti riservati.</p>
+    <div class="d-flex container justify-content-between">
+        <p>&copy 2025 The Championnat. Tutti i diritti riservati.</p>
+        <a href="https://github.com/matteofuso/Campionato" target="_blank"><i class="bi bi-github me-2 link-body-emphasis"></i>matteofuso/Campionato</a>
     </div>
 </footer>
 <script src="scripts/colormode.js"></script>

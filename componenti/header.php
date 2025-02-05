@@ -1,15 +1,15 @@
-<?php /**@var $nav_page */ ?>
-<?php /**@var $main_classes */ ?>
-<?php $pages = [
-    "Home" => "index.php",
-    "Catalogo" => "catalogo.php",
-    "Inserisci" => "inserisci.php",
-    "Modifica" => "modifica.php",
-];
-$file = $_SERVER['DOCUMENT_ROOT'] . $_SERVER['PHP_SELF'];
-$file = str_replace('\\', '/', $file);
-$main_classes = $main_classes ?? 'container my-4';
+<?php
+/**@var $nav_page */
+/**@var $main_classes */
 /**@var $title*/
+$pages = [
+    "index.php" => "Homepage",
+    "iscrizione.php" => "Iscrizione",
+    "gare.php" => "Le Gare",
+    "classifiche.php" => "Classifiche",
+];
+$main_classes = $main_classes ?? 'container my-4';
+$curr_page = basename($_SERVER['PHP_SELF']);
 ?>
 
 <!doctype html>
@@ -23,15 +23,15 @@ $main_classes = $main_classes ?? 'container my-4';
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="icon" type="image/x-icon" href="images/logo.png">
-    <title>Libreria - <?= $title ?></title>
+    <link rel="icon" type="image/x-icon" href="images/logo.webp">
+    <title>The Championnat - <?= $pages[$curr_page] ?></title>
 </head>
 <body class="d-flex flex-column">
 <header data-bs-theme="dark" class="bg-body shadow-lg sticky-top">
     <div class="d-flex justify-content-between align-items-center py-2 container">
-        <a href="<?= $pages['Home'] ?>" class="d-flex align-items-center text-decoration-none link-body-emphasis">
-            <img src="images/logo.png" alt="La Libreria" class="logo" height="100px">
-            <span class="logo-text h1 my-0 d-none d-sm-block">La Libreria</span>
+        <a href="<?= $pages[$curr_page] ?>" class="d-flex align-items-center text-decoration-none link-body-emphasis">
+            <img src="images/logo.webp" alt="The Championnat" class="logo me-3" height="100px">
+            <span class="logo-text h1 my-0 d-none d-sm-block">The Championnat</span>
         </a>
         <div class="d-flex">
             <div class="dropdown bd-mode-toggle">
@@ -79,11 +79,9 @@ $main_classes = $main_classes ?? 'container my-4';
             <div class="collapse navbar-collapse" id="navbar">
                 <ul class="navbar-nav my-3">
                     <?php
-                    foreach ($pages as $page => $link) {
-                        $filename = realpath($link);
-                        $filename = str_replace('\\', '/', $filename);
-                        $active = $file === $filename ? ' active' : '';
-                        echo "<li class=\"nav-item mx-2\"><a class=\"nav-link$active\" href=\"$link\">$page</a></li>";
+                    foreach ($pages as $link => $page) {
+                        $active = $curr_page == $link ? ' active' : '';
+                        echo '<li class="nav-item mx-2"><a class="nav-link' . $active .'" href="' . $link . '">' . $page . '</a></li>';
                     }
                     ?>
                 </ul>

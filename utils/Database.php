@@ -19,10 +19,10 @@ class Database
         return $stm->fetchAll();
     }
 
-    public static function connect(array $config, bool $retry = false): ?PDO
+    public static function connect(array $config, bool $reconnect = false): ?PDO
     {
         if (empty(self::$PDO)) {
-            if (!self::$connectionFailed || $retry) {
+            if (!self::$connectionFailed || $reconnect) {
                 try {
                     self::$PDO = new PDO(
                         "$config[driver]:host=$config[host];dbname=$config[dbname]",
