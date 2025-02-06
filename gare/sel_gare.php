@@ -5,7 +5,9 @@
     try {
         $gare = Database::select("select g.id, g.circuito, g.data, g.tempo_migliore from gare g;");
         Helpers::printTable(['ID', 'Circuito', 'Data', 'Tempo migliore', 'Classifica'], $gare, [
-            function($row) {return '<button class="btn btn-primary btn-sm me-2 px-2" onclick="window.location=\'?gara=' . $row->id . '\'"><i class="bi bi-box-arrow-in-right"></i></button>';}
+            function($row) {return '<button class="btn btn-secondary btn-sm me-2 px-2" onclick="window.location=\'?gara=' . $row->id . '\'"><i class="bi bi-box-arrow-in-right"></i></button>';},
+            function($row) {return '<button class="btn btn-primary btn-sm me-2 px-2" onclick=""><i class="bi bi-pencil"></i></button>';},
+            function($row) {return '<button class="btn btn-danger btn-sm me-2 px-2" onclick=""><i class="bi bi-trash"></i></button>';}
         ]);
     } catch (Exception $e) {
         echo '<p>Errore nel recupero dei dati</p>';

@@ -13,7 +13,10 @@
     <?php
         try{
             $gare = Database::select('select g.id, g.circuito, g.data, p.punteggio from partecipazioni p join gare g on g.id = p.gara where p.pilota = :pilota;', ['pilota' => $pilota->numero]);
-            Helpers::printTable(['ID', 'Circuito', 'Data', 'Punteggio'], $gare);
+            Helpers::printTable(['ID', 'Circuito', 'Data', 'Punteggio', 'Azioni'], $gare, [
+                function($row) {return '<button class="btn btn-primary btn-sm me-2 px-2" onclick=""><i class="bi bi-pencil"></i></button>';},
+                function($row) {return '<button class="btn btn-danger btn-sm me-2 px-2" onclick=""><i class="bi bi-trash"></i></button>';}
+            ]);
         } catch (Exception $e) {
             echo '<p>Errore nel recupero dei dati</p>';
         }

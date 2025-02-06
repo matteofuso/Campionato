@@ -4,8 +4,10 @@
     <?php
     try {
         $piloti = Database::select("select p.*, ca.livrea from piloti p join case_automobilistiche ca on p.casa_automobilistica = ca.nome;");
-        Helpers::printTable(['ID', 'Nome', 'Cognome', 'Nazionalità', 'Scuderia', 'Colore livrea', 'Azione'], $piloti, [
-            function($row) {return '<button class="btn btn-primary btn-sm me-2 px-2" onclick="window.location=\'?pilota=' . $row->numero . '\'"><i class="bi bi-box-arrow-in-right"></i></button>';}
+        Helpers::printTable(['ID', 'Nome', 'Cognome', 'Nazionalità', 'Scuderia', 'Colore livrea', 'Azioni'], $piloti, [
+            function($row) {return '<button class="btn btn-secondary btn-sm me-2 px-2" onclick="window.location=\'?pilota=' . $row->numero . '\'"><i class="bi bi-box-arrow-in-right"></i></button>';},
+            function($row) {return '<button class="btn btn-primary btn-sm me-2 px-2" onclick=""><i class="bi bi-pencil"></i></button>';},
+            function($row) {return '<button class="btn btn-danger btn-sm me-2 px-2" onclick=""><i class="bi bi-trash"></i></button>';}
         ]);
     } catch (Exception $e) {
         echo '<p>Errore nel recupero dei dati</p>';

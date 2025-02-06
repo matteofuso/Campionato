@@ -22,10 +22,11 @@ create table gare(
     id int primary key auto_increment,
     data date not null,
     circuito varchar(100) not null,
-    tempo_migliore time(6),
+    tempo_migliore time(3),
     foreign key (circuito) references circuiti(luogo)
 );
-drop table gare;
+-- drop table gare;
+
 create table piloti(
     numero int primary key,
     nome varchar(100) not null,
@@ -40,11 +41,12 @@ create table partecipazioni(
     pilota int,
     gara int,
     punteggio int,
-    primary key(pilota, gara, punteggio),
+    primary key(pilota, gara),
     foreign key (pilota) references piloti(numero),
     foreign key (gara) references gare(id)
 );
-drop table partecipazioni;
+-- drop table partecipazioni;
+
 -- Inserting data into nazionalita
 INSERT INTO nazionalita (nazionalita)
 values
@@ -122,27 +124,3 @@ values
     (3, 5, 15),
     (4, 5, 10),
     (5, 5, 8);
-
-select p.punteggio, p2.nome, p2.cognome, p2.nazionalita, p2.casa_automobilistica, g.data, g.circuito from partecipazioni p
-    join piloti p2 on p.pilota = p2.numero
-    join gare g on g.id = p.gara
-order by p.punteggio desc;
-
-select sum(p.punteggio) as punteggio, p2.nome, p2.cognome from partecipazioni p
-    join piloti p2 on p.pilota = p2.numero
-    join gare g on g.id = p.gara
-group by p.pilota
-order by punteggio desc;
-
-SELECT
-    DENSE_RANK() OVER (order by SUM(p.punteggio) desc) AS posizione,
-        SUM(p.punteggio) AS punteggio,
-    p2.nome,
-    p2.cognome,
-    p2.nazionalita,
-    p2.casa_automobilistica
-FROM partecipazioni p
-         JOIN piloti p2 ON p.pilota = p2.numero
-         JOIN gare g ON g.id = p.gara
-GROUP BY p.pilota, p2.nome, p2.cognome
-order by posizione asc;

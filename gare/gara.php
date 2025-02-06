@@ -11,7 +11,7 @@
         where g.id = $gara->id
         order by p.punteggio desc;
         SQL);
-        Helpers::printTable(['Posizione', 'Nome', 'Cognome', 'Nazionalità', 'Scuderia', 'Punteggio'], $gare);
+        Helpers::printTable(['Posizione', 'Nome', 'Cognome', 'Nazionalità', 'Scuderia', 'Punteggio', ], $gare);
     } catch (Exception $e) {
         echo '<p>Errore nel recupero dei dati</p>';
     }
