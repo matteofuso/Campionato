@@ -4,9 +4,9 @@
 /**@var $title*/
 $pages = [
     "index.php" => "Homepage",
-    "iscrizione.php" => "Iscrizione",
+    "piloti.php" => "I piloti",
     "gare.php" => "Le Gare",
-    "classifiche.php" => "Classifiche",
+    "classifica.php" => "Classifica Generale",
 ];
 $main_classes = $main_classes ?? 'container my-4';
 $curr_page = basename($_SERVER['PHP_SELF']);
@@ -24,12 +24,12 @@ $curr_page = basename($_SERVER['PHP_SELF']);
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="icon" type="image/x-icon" href="images/logo.webp">
-    <title>The Championnat - <?= $pages[$curr_page] ?></title>
+    <title>The Championnat - <?= $pages[$curr_page] ?? $title ?></title>
 </head>
 <body class="d-flex flex-column">
 <header data-bs-theme="dark" class="bg-body shadow-lg sticky-top">
     <div class="d-flex justify-content-between align-items-center py-2 container">
-        <a href="<?= $pages[$curr_page] ?>" class="d-flex align-items-center text-decoration-none link-body-emphasis">
+        <a href="<?= $pages['index.php']?>" class="d-flex align-items-center text-decoration-none link-body-emphasis">
             <img src="images/logo.webp" alt="The Championnat" class="logo me-3" height="100px">
             <span class="logo-text h1 my-0 d-none d-sm-block">The Championnat</span>
         </a>

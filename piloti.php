@@ -9,12 +9,12 @@ Database::connect($config);
 <?php require 'componenti/alert.php';?>
 
 <?php
-$gara = $_GET['gara'] ?? "";
-if (!$gara){
-    require 'gare/sel_gare.php';
+$pilota = $_GET['pilota'] ?? "";
+if (!$pilota){
+    require 'iscrizioni/sel_pilota.php';
 }
 else {
-    require 'gare/gara.php';}
+    require 'iscrizioni/isc_gara.php';}
 ?>
 
 <?php require 'componenti/footer.php'; ?>

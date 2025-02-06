@@ -10,11 +10,11 @@ Database::connect($config);
 <?php require 'componenti/alert.php';?>
 
 <section>
-    <form method="post" action="actions/inserisci_gara.php">
-        <h1>Creazione gare</h1>
-        <p>Inserisci i dati della gara</p>
-        <?php require 'form/gara.php';?>
-        <input type="submit" class="btn btn-primary" value="Inserisci la gara">
+    <form method="post" action="actions/inserisci_pilota.php">
+        <h1>Registrazione</h1>
+        <p>Inserisci i dati del pilota</p>
+        <?php require 'form/pilota.php';?>
+        <input type="submit" class="btn btn-primary" value="Registra il pilota">
     </form>
 </section>
 
