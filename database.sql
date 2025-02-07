@@ -1,51 +1,58 @@
 create database campionato;
 use campionato;
 create table nazionalita(
-    nazionalita varchar(100) primary key
+                            nazionalita varchar(100) primary key
 );
 -- drop table nazionalita;
 create table circuiti(
-    luogo varchar(100) primary key
+                         luogo varchar(100) primary key
 );
 -- drop table circuiti;
 create table livree(
-    colore varchar(50) primary key
+                       colore varchar(50) primary key
 );
--- drop table livree;
+drop table livree;
 create table case_automobilistiche(
-    nome varchar(100) primary key,
-    livrea varchar(50) not null,
-    foreign key (livrea) references livree(colore)
+                                      nome varchar(100) primary key,
+                                      livrea varchar(50) not null,
+                                      foreign key (livrea) references livree(colore)
+                                          on update cascade
 );
--- drop table case_automobilistiche;
+drop table case_automobilistiche;
 create table gare(
-    id int primary key auto_increment,
-    data date not null,
-    circuito varchar(100) not null,
-    tempo_migliore time(3),
-    foreign key (circuito) references circuiti(luogo)
+                     id int primary key auto_increment,
+                     data date not null,
+                     circuito varchar(100) not null,
+                     tempo_migliore time(3),
+                     foreign key (circuito) references circuiti(luogo)
+                         on update cascade
 );
--- drop table gare;
+drop table gare;
 
 create table piloti(
-    numero int primary key,
-    nome varchar(100) not null,
-    cognome varchar(100) not null,
-    nazionalita varchar(100) not null,
-    casa_automobilistica varchar(100) not null,
-    foreign key (nazionalita) references nazionalita(nazionalita),
-    foreign key (casa_automobilistica) references case_automobilistiche(nome)
+                       numero int primary key,
+                       nome varchar(100) not null,
+                       cognome varchar(100) not null,
+                       nazionalita varchar(100) not null,
+                       casa_automobilistica varchar(100) not null,
+                       foreign key (nazionalita) references nazionalita(nazionalita)
+                           on update cascade,
+                       foreign key (casa_automobilistica) references case_automobilistiche(nome)
+                           on update cascade
 );
--- drop table piloti;
+drop table piloti;
 create table partecipazioni(
-    pilota int,
-    gara int,
-    punteggio int,
-    primary key(pilota, gara),
-    foreign key (pilota) references piloti(numero),
-    foreign key (gara) references gare(id)
+                               pilota int,
+                               gara int,
+                               punteggio int,
+                               primary key(pilota, gara),
+                               foreign key (pilota) references piloti(numero)
+                                   on update cascade,
+                               foreign key (gara) references gare(id)
+                                   on update cascade
+                                   on delete cascade
 );
--- drop table partecipazioni;
+drop table partecipazioni;
 
 -- Inserting data into nazionalita
 INSERT INTO nazionalita (nazionalita)
