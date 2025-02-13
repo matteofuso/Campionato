@@ -8,7 +8,7 @@ Database::connect($config);
 <?php require 'componenti/header.php';?>
 <?php require 'componenti/alert.php';?>
 
-<section>
+<section class="mb-4">
     <h1>Le case automobilistiche partecipanti</h1>
     <?php
     try{
@@ -22,6 +22,23 @@ Database::connect($config);
         echo '<p>Errore nel recupero dei dati</p>';
     }
     ?>
+</section>
+
+<section>
+    <form method="post" action="actions/inserisci_ca.php">
+        <h1>Inserimento Casa Automobilistica</h1>
+        <div class="row">
+            <div class="mb-3 col-md-6">
+                <label for="nome" class="form-label">Nome della casa automobilistica</label>
+                <input type="text" class="form-control new-casa-automobilistica" id="nome" name="nome" placeholder="Ferrari">
+            </div>
+            <div class="mb-3 col-md-6">
+                <label for="livrea" class="form-label">Colore della livrea</label>
+                <input type="text" class="form-control" id="livrea" name="livrea" placeholder="Rosso">
+            </div>
+        </div>
+        <button type="submin" class="btn btn-primary">Inserisci</button>
+    </form>
 </section>
 
 <form method="post" action="actions/elimina_ca.php" class="modal faded" id="delete" tabindex="-1" aria-labelledby="deleteFormTitle" aria-hidden="true">

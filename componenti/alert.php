@@ -48,6 +48,7 @@ if (isset($_GET['succ'])){
         '9' => 'Gara inserita con successo',
         '10' => 'Gara modificata con successo',
         '11' => 'Gara eliminata con successo',
+        '12' => 'Casa automobilistica aggiunta con successo',
     ];
     $succ = $_GET['succ'];
     if (!array_key_exists($succ, $successes)) {
