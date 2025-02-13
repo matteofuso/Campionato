@@ -1,58 +1,50 @@
 create database campionato;
 use campionato;
 create table nazionalita(
-                            nazionalita varchar(100) primary key
+    nazionalita varchar(100) primary key
 );
 -- drop table nazionalita;
+
 create table circuiti(
-                         luogo varchar(100) primary key
+    luogo varchar(100) primary key
 );
+
 -- drop table circuiti;
-create table livree(
-                       colore varchar(50) primary key
-);
-drop table livree;
 create table case_automobilistiche(
-                                      nome varchar(100) primary key,
-                                      livrea varchar(50) not null,
-                                      foreign key (livrea) references livree(colore)
-                                          on update cascade
+    nome varchar(100) primary key,
+    livrea varchar(10) not null
 );
-drop table case_automobilistiche;
+-- drop table case_automobilistiche;
+
 create table gare(
-                     id int primary key auto_increment,
-                     data date not null,
-                     circuito varchar(100) not null,
-                     tempo_migliore time(3),
-                     foreign key (circuito) references circuiti(luogo)
-                         on update cascade
+    id int primary key auto_increment,
+    data date not null,
+    circuito varchar(100) not null,
+    tempo_migliore time(3),
+    foreign key (circuito) references circuiti(luogo) on update cascade
 );
-drop table gare;
+-- drop table gare;
 
 create table piloti(
-                       numero int primary key,
-                       nome varchar(100) not null,
-                       cognome varchar(100) not null,
-                       nazionalita varchar(100) not null,
-                       casa_automobilistica varchar(100) not null,
-                       foreign key (nazionalita) references nazionalita(nazionalita)
-                           on update cascade,
-                       foreign key (casa_automobilistica) references case_automobilistiche(nome)
-                           on update cascade
+    numero int primary key,
+    nome varchar(100) not null,
+    cognome varchar(100) not null,
+    nazionalita varchar(100) not null,
+    casa_automobilistica varchar(100) not null,
+    foreign key (nazionalita) references nazionalita(nazionalita) on update cascade,
+    foreign key (casa_automobilistica) references case_automobilistiche(nome) on update cascade
 );
-drop table piloti;
+-- drop table piloti;
+
 create table partecipazioni(
-                               pilota int,
-                               gara int,
-                               punteggio int,
-                               primary key(pilota, gara),
-                               foreign key (pilota) references piloti(numero)
-                                   on update cascade,
-                               foreign key (gara) references gare(id)
-                                   on update cascade
-                                   on delete cascade
+    pilota int,
+    gara int,
+    punteggio int,
+    primary key(pilota, gara),
+    foreign key (pilota) references piloti(numero) on update cascade,
+    foreign key (gara) references gare(id)
 );
-drop table partecipazioni;
+-- drop table partecipazioni;
 
 -- Inserting data into nazionalita
 INSERT INTO nazionalita (nazionalita)
@@ -63,6 +55,7 @@ values
     ('Francia'),
     ('Inghilterra'),
     ('Spagna');
+
 -- Inserting data into circuiti
 INSERT INTO circuiti (luogo)
 VALUES
@@ -71,14 +64,7 @@ VALUES
     ('Monaco'),
     ('Spa-Francorchamps'),
     ('Barcelona');
--- Inserting data into livree
-INSERT INTO livree (colore)
-VALUES
-    ('Rosso'),
-    ('Blu'),
-    ('Verde'),
-    ('Giallo'),
-    ('Nero');
+
 -- Inserting data into case_automobilistiche
 INSERT INTO case_automobilistiche (nome, livrea)
 VALUES
@@ -87,6 +73,7 @@ VALUES
     ('Red Bull Racing', 'Verde'),
     ('McLaren', 'Giallo'),
     ('Alfa Romeo', 'Nero');
+
 -- Inserting data into gare
 INSERT INTO gare (data, circuito, tempo_migliore)
 VALUES
@@ -95,6 +82,7 @@ VALUES
     ('2025-04-05', 'Monaco', '01:15:48.755'),
     ('2025-04-12', 'Spa-Francorchamps', '01:17:32.132'),
     ('2025-05-03', 'Barcelona', '01:20:55.423');
+
 -- Inserting data into piloti
 INSERT INTO piloti (numero, nome, cognome, nazionalita, casa_automobilistica)
 VALUES
@@ -103,6 +91,7 @@ VALUES
     (3, 'Charles', 'Leclerc', 'Italia', 'Ferrari'),
     (4, 'Max', 'Verstappen', 'Olanda', 'Red Bull Racing'),
     (5, 'Lando', 'Norris', 'Inghilterra', 'McLaren');
+
 -- Inserting data into partecipazioni
 INSERT INTO partecipazioni (pilota, gara, punteggio)
 values

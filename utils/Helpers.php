@@ -1,5 +1,4 @@
 <?php
-
 class Helpers
 {
     public static function printTable(array $headings, array $stdArray, array $buttonCallbacks = []): void

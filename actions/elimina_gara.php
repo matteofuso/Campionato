@@ -17,10 +17,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     try{
         Database::query("delete from gare where id = :id;", [':id' => $id]);
-        header('Location: ../gare.php?succ=2');
+        header('Location: ../gare.php?succ=11');
     } catch (Exception $e){
-        Log::errlog($e, "../log/edit_gara.log");
-        header('Location: ../gare.php?err=1');
+        Log::errlog($e);
+        header('Location: ../gare.php?err=14');
     }
 } else{
     http_response_code(405);

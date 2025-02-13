@@ -17,9 +17,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     try {
         Database::query("delete from piloti where numero = :numero;", [':numero' => $numero]);
-        header('Location: ../piloti.php?succ=-1');
+        header('Location: ../piloti.php?succ=3');
     } catch (Exception $e) {
-        header('Location: ../piloti.php?err=-1');
+        Log::errlog($e);
+        header('Location: ../piloti.php?err=5');
     }
 } else{
     http_response_code(405);

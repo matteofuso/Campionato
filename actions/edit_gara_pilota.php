@@ -14,14 +14,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (!Database::connect($config)){
-        header('Location: ../piloti.php?pilota=' . $codice . '&err=0');
+        header("Location: ../piloti.php?pilota=$codice&err=0");
     }
 
     try{
         Database::query("update partecipazioni set punteggio = :punteggio where pilota = :codice and gara = :id;", [':punteggio' => $punteggio, ':codice' => $codice, ':id' => $id]);
-        header("Location: ../piloti.php?pilota={$codice}&succ=1");
+        header("Location: ../piloti.php?pilota=$codice&succ=7");
     } catch (Exception $e) {
-        header('Location: ../piloti.php?pilota=' . $codice . '&err=-1');
+        Log::errlog($e);
+        header("Location: ../piloti.php?pilota=$codice&err=9");
     }
 } else{
     http_response_code(405);

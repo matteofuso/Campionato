@@ -11,8 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $new_nazionalita = $_POST['new-nazionalita'] ?? "";
     $casa_automobilistica = $_POST['casa-automobilistica'] ?? "";
     $new_ca_nome = $_POST['new-ca-nome'] ?? "";
-    $new_ca_livrea = $_POST['new-ca-livrea'] ?? "";
-    $new_livea = $_POST['new-livrea'] ?? "";
+    $new_livrea = $_POST['new-livrea'] ?? "";
 
     if(empty($numero) || empty($nome) || empty($cognome) || empty($nazionalita) || empty($casa_automobilistica)){
         http_response_code(400);
@@ -24,13 +23,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    if ($casa_automobilistica == "-1" && (empty($new_ca_nome) || empty($new_ca_livrea))){
+    if ($casa_automobilistica == "-1" && (empty($new_ca_nome) || empty($new_livrea))){
         http_response_code(402);
-        exit;
-    }
-
-    if ($new_ca_livrea == "-1" && empty($new_livea)){
-        http_response_code(403);
         exit;
     }
 
@@ -41,26 +35,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
         if ($nazionalita == "-1"){
             $new_nazionalita = ucwords($new_nazionalita);
-            Database::query("insert into nazionalita (nazionalita) values (:nazionalita);", [':nazionalita' => $new_nazionalita]);
-            $nazionalita = $new_nazionalita;
-        }
-
-        if ($new_ca_livrea == "-1"){
-            $new_livea = ucwords($new_livea);
-            Database::query("insert into livree (colore) values (:colore);", [':colore' => $new_livea]);
-            $new_ca_livrea = $new_livea;
+            try{
+                Database::query("insert into nazionalita (nazionalita) values (:nazionalita);", [':nazionalita' => $new_nazionalita]);
+                $nazionalita = $new_nazionalita;
+            } catch (Exception $e)
+            {
+                Log::errlog($e);
+                header('Location: ../piloti.php?err=1');
+            }
         }
 
         if ($casa_automobilistica == "-1"){
             $new_ca_nome = ucwords($new_ca_nome);
-            Database::query("insert into case_automobilistiche (nome, livrea) values (:nome, :livrea);", [':nome' => $new_ca_nome, ':livrea' => $new_ca_livrea]);
-            $casa_automobilistica = $new_ca_nome;
+            try
+            {
+                Database::query("insert into case_automobilistiche (nome, livrea) values (:nome, :livrea);", [':nome' => $new_ca_nome, ':livrea' => $new_livrea]);
+                $casa_automobilistica = $new_ca_nome;
+            } catch (Exception $e)
+            {
+                Log::errlog($e);
+                header('Location: ../piloti.php?err=2');
+            }
         }
 
         Database::query("insert into piloti (numero, nome, cognome, nazionalita, casa_automobilistica) values (:numero, :nome, :cognome, :nazionalita, :casa_automobilistica);", [':numero' => $numero, ':nome' => $nome, ':cognome' => $cognome, ':nazionalita' => $nazionalita, ':casa_automobilistica' => $casa_automobilistica]);
-        header('Location: ../piloti.php?succ=-1');
+        header('Location: ../piloti.php?succ=1');
     } catch (Exception $e) {
-        Log::errlog($e, '../log/inserisci.log');
+        Log::errlog($e);
         header('Location: ../piloti.php?err=-1');
     }
 } else{

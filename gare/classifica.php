@@ -13,7 +13,9 @@
         SQL);
         Helpers::printTable(['Posizione', 'Nome', 'Cognome', 'Nazionalità', 'Scuderia', 'Punteggio', ], $gare);
     } catch (Exception $e) {
+        Log::errlog($e);
         echo '<p>Errore nel recupero dei dati</p>';
     }
     ?>
+    <p>Se vuoi modificare i dati, fallo dalla pagina <a href="piloti.php">dei piloti</a></p>
 </section>

@@ -11,10 +11,10 @@ Database::connect($config);
 <?php
 $gara = $_GET['gara'] ?? "";
 if (!$gara){
-    require 'gare/sel_gare.php';
+    require 'gare/inserimento.php';
 }
 else {
-    require 'gare/gara.php';}
+    require 'gare/classifica.php';}
 ?>
 
 <?php require 'componenti/footer.php'; ?>

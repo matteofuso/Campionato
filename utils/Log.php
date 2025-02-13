@@ -1,13 +1,16 @@
 <?php
-
 class Log
 {
-    static function errlog(Exception $e, string $file): void{
-        $directory = dirname($file);
-        if (!is_dir($directory)) {
+    static function errlog(Exception $e): void{
+        $err_file = $e->getFile();
+        $err_line = $e->getLine();
+        $directory =  dirname(__DIR__) . DIRECTORY_SEPARATOR . 'logs';
+        if (!file_exists($directory)) {
             mkdir($directory, 0777, true);
         }
-        error_log("[" . date('Y-m-d H:i:s') . "] " . $e->getMessage() . "\n", '3', $file);
+        $error_msg = "[" . date('Y-m-d H:i:s') . "] " . $err_file . " on line " . $err_line .": " . $e->getMessage() . "\n";
+        $file = $directory . DIRECTORY_SEPARATOR. date('d-m-Y') . '.log';
+        error_log($error_msg, 3, $file);
     }
 
 }

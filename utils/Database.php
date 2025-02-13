@@ -1,6 +1,5 @@
 <?php
 include_once 'Log.php';
-
 class Database
 {
     private static ?PDO $PDO = null;
@@ -33,7 +32,7 @@ class Database
                     ]);
                 } catch (PDOException $e) {
                     self::$connectionFailed = true;
-                    Log::errlog($e, 'log/connect.log');
+                    Log::errlog($e);
                 }
             }
         }

@@ -1,20 +1,20 @@
 <?php $prefix = $prefix?? ''?>
 <div class="row">
     <div class="mb-3 col-md-6">
-        <label for="numero" class="form-label">Numero del pilota</label>
-        <input type="number" class="form-control" id="<?=$prefix?>numero" name="numero" placeholder="23" required>
+        <label for="<?=$prefix?>numero" class="form-label">Numero del pilota</label>
+        <input type="<?=$prefix?>number" class="form-control" id="<?=$prefix?>numero" name="numero" placeholder="23" required>
     </div>
     <div class="mb-3 col-md-6">
-        <label for="nome" class="form-label">Nome del pilota</label>
+        <label for="<?=$prefix?>nome" class="form-label">Nome del pilota</label>
         <input type="text" class="form-control" id="<?=$prefix?>nome" name="nome" placeholder="Mario" required>
     </div>
     <div class="mb-3 col-md-6">
-        <label for="cognome" class="form-label">Cognome del pilota</label>
+        <label for="<?=$prefix?>cognome" class="form-label">Cognome del pilota</label>
         <input type="text" class="form-control" id="<?=$prefix?>cognome" name="cognome" placeholder="Rossi" required>
     </div>
     <div class="mb-3 col-md-6">
-        <label for="nazionalita" class="form-label">Nazionalità del pilota</label>
-        <select name="nazionalita" id="<?=$prefix?>nazionalita" class="form-select form-select-insert" data-insert-target="new-nazionalita" required>
+        <label for="<?=$prefix?>nazionalita" class="form-label">Nazionalità del pilota</label>
+        <select name="nazionalita" id="<?=$prefix?>nazionalita" class="form-select form-select-insert" data-insert-target="<?=$prefix?>new-nazionalita" required>
             <option value="" selected disabled hidden class="text-secondary">Seleziona la nazionalità</option>
             <?php
             try {
@@ -23,19 +23,19 @@
                     echo "<option value=\"$n->nazionalita\">$n->nazionalita</option>";
                 }
             } catch (Exception $e) {
-                Log::errlog($e, '../log/inserisci.log');
+                Log::errlog($e);
             }
             ?>
             <option value="-1">Inserisci un'altra nazionalità...</option>
         </select>
     </div>
     <div class="mb-3 col-md-6 d-none">
-        <label for="new-nazionalita" class="form-label">Nazionalità del pilota</label>
-        <input type="text" class="form-control new-nazionalita" id="<?=$prefix?>new-nazionalita" name="new-nazionalita" placeholder="Italiana">
+        <label for="<?=$prefix?>new-nazionalita" class="form-label">Nazionalità del pilota</label>
+        <input type="text" class="form-control <?=$prefix?>new-nazionalita" id="<?=$prefix?>new-nazionalita" name="new-nazionalita" placeholder="Italiana">
     </div>
     <div class="mb-3 col-md-6">
-        <label for="casa-automobilistica" class="form-label">Casa automobilistica del pilota</label>
-        <select name="casa-automobilistica" id="<?=$prefix?>casa-automobilistica" class="form-select form-select-insert" data-insert-target="new-casa-automobilistica" required>
+        <label for="<?=$prefix?>casa-automobilistica" class="form-label">Casa automobilistica del pilota</label>
+        <select name="casa-automobilistica" id="<?=$prefix?>casa-automobilistica" class="form-select form-select-insert" data-insert-target="<?=$prefix?>new-casa-automobilistica" required>
             <option value="" selected disabled hidden class="text-secondary">Seleziona la casa automobilistica del pilota</option>
             <?php
             try {
@@ -44,35 +44,18 @@
                     echo "<option value=\"$c->nome\">$c->nome ($c->livrea)</option>";
                 }
             } catch (Exception $e) {
-                Log::errlog($e, '../log/inserisci.log');
+                Log::errlog($e);
             }
             ?>
             <option value="-1">Inserisci un'altra casa automobilistica...</option>
         </select>
     </div>
     <div class="mb-3 col-md-6 d-none">
-        <label for="new-ca-nome" class="form-label">Nome della casa automobilistica</label>
-        <input type="text" class="form-control new-casa-automobilistica" id="<?=$prefix?>new-ca-nome" name="new-ca-nome" placeholder="Ferrari">
+        <label for="<?=$prefix?>new-ca-nome" class="form-label">Nome della casa automobilistica</label>
+        <input type="text" class="form-control <?=$prefix?>new-casa-automobilistica" id="<?=$prefix?>new-ca-nome" name="new-ca-nome" placeholder="Ferrari">
     </div>
     <div class="mb-3 col-md-6 d-none">
-        <label for="new-ca-livrea" class="form-label">Livrea della casa automobilistica</label>
-        <select name="new-ca-livrea" id="<?=$prefix?>new-ca-livrea" class="form-select form-select-insert new-casa-automobilistica" data-insert-target="new-livrea">
-            <option value="" selected disabled hidden class="text-secondary">Seleziona la livrea della casa automobilistica</option>
-            <?php
-            try {
-                $livree = Database::select('select * from livree l;');
-                foreach ($livree as $l) {
-                    echo "<option value=\"$l->colore\">$l->colore</option>";
-                }
-            } catch (Exception $e) {
-                Log::errlog($e, '../log/inserisci.log');
-            }
-            ?>
-            <option value="-1">Inserisci un'altro colore...</option>
-        </select>
-    </div>
-    <div class="mb-3 col-md-6 d-none">
-        <label for="new-livrea" class="form-label">Colore della livrea</label>
-        <input type="text" class="form-control new-livrea" id="<?=$prefix?>new-livrea" name="new-livrea" placeholder="Rosso">
+        <label for="<?=$prefix?>new-ca-livrea" class="form-label">Colore della livrea</label>
+        <input type="text" class="form-control <?=$prefix?>new-casa-automobilistica" id="<?=$prefix?>new-livrea" name="new-livrea" placeholder="Rosso">
     </div>
 </div>

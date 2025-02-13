@@ -4,6 +4,7 @@
 /**@var $title*/
 $pages = [
     "index.php" => "Homepage",
+    "case_automobilistiche.php" => "Le Case Automobilistiche",
     "piloti.php" => "I piloti",
     "gare.php" => "Le Gare",
     "classifica.php" => "Classifica Generale",
@@ -29,7 +30,7 @@ $curr_page = basename($_SERVER['PHP_SELF']);
 <body class="d-flex flex-column">
 <header data-bs-theme="dark" class="bg-body shadow-lg sticky-top">
     <div class="d-flex justify-content-between align-items-center py-2 container">
-        <a href="<?= $pages['index.php']?>" class="d-flex align-items-center text-decoration-none link-body-emphasis">
+        <a href="index.php" class="d-flex align-items-center text-decoration-none link-body-emphasis">
             <img src="images/logo.webp" alt="The Championnat" class="logo me-3" height="100px">
             <span class="logo-text h1 my-0 d-none d-sm-block">The Championnat</span>
         </a>

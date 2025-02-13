@@ -20,6 +20,7 @@ Database::connect($config);
         SQL);
         Helpers::printTable(['Posizione', 'Nome', 'Cognome', 'Nazionalità', 'Scuderia', 'Punteggio'], $gare);
     } catch (Exception $e) {
+        Log::errlog($e);
         echo '<p>Errore nel recupero dei dati</p>';
     }
     ?>

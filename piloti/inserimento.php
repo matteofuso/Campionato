@@ -10,6 +10,7 @@
             function($row) {return '<button class="btn btn-danger btn-sm me-2 px-2" data-bs-toggle="modal" data-bs-target="#deleteForm" onclick="delete_pilota(' . $row->numero . ')"><i class="bi bi-trash"></i></button>';}
         ]);
     } catch (Exception $e) {
+        Log::errlog($e);
         echo '<p>Errore nel recupero dei dati</p>';
     }
     ?>

@@ -11,10 +11,10 @@ Database::connect($config);
 <?php
 $pilota = $_GET['pilota'] ?? "";
 if (!$pilota){
-    require 'piloti/sel_pilota.php';
+    require 'piloti/inserimento.php';
 }
 else {
-    require 'piloti/isc_gara.php';}
+    require 'piloti/iscrizione.php';}
 ?>
 
 <?php require 'componenti/footer.php'; ?>

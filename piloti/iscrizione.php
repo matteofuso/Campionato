@@ -6,6 +6,7 @@
         $pilota = Database::select("select * from piloti where numero = :numero", ['numero' => $pilota])[0];
         echo '<p>Il pilota selezionato è ' . $pilota->numero . ' - ' . $pilota->nome . ' ' . $pilota->cognome . '</p>';
     } catch (Exception $e) {
+        Log::errlog($e);
         echo '<p>Errore nel recupero dei dati</p>';
     }
     ?>
@@ -24,6 +25,7 @@
             }
         ]);
     } catch (Exception $e) {
+        Log::errlog($e);
         echo '<p>Errore nel recupero dei dati</p>';
     }
     ?>
@@ -44,6 +46,7 @@
                             echo "<option value=\"$g->id\">$g->circuito - $g->data</option>";
                         }
                     } catch (Exception $e) {
+                        Log::errlog($e);
                         echo '<option value="" disabled>Errore nel recupero dei dati</option>';
                     }
                     ?>

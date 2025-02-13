@@ -14,14 +14,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (!Database::connect($config)){
-        header('Location: ../piloti.php?err=0');
+        Log::errlog($e);
+        header("Location: ../piloti.php?pilota=$pilota&err=0");
     }
 
     try {
         Database::query("insert into partecipazioni (gara, pilota, punteggio) values (:gara, :pilota, :punteggio);", [':gara' => $gara, ':pilota' => $pilota, ':punteggio' => $punteggio]);
-        header('Location: ../piloti.php?succ=-1');
+        header("Location: ../piloti.php?pilota=$pilota&succ=6");
     } catch (Exception $e) {
-        header('Location: ../piloti.php?err=-1');
+        Log::errlog($e);
+        header("Location: ../piloti.php?pilota=$pilota&err=8");
     }
 } else{
     http_response_code(405);

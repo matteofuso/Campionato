@@ -23,17 +23,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header('Location: ../gare.php?err=0');
     }
 
-    try {
-        if ($circuito == "-1"){
-            $new_circuito = ucwords($new_circuito);
+    if ($circuito == "-1"){
+        $new_circuito = ucwords($new_circuito);
+        try
+        {
             Database::query("insert into circuiti (luogo) values (:luogo);", [':luogo' => $new_circuito]);
             $circuito = $new_circuito;
+        } catch (Exception $e)
+        {
+            Log::errlog($e);
+            header('Location: ../gare.php?err=11');
         }
+    }
 
+    try {
         Database::query("insert into gare (circuito, data, tempo_migliore) values (:circuito, :data, :tempo_migliore);", [':circuito' => $circuito, ':data' => $data, ':tempo_migliore' => $tempo_migliore]);
-        header('Location: ../gare.php?succ=-1');
+        header('Location: ../gare.php?succ=9');
     } catch (Exception $e) {
-        header('Location: ../gare.php?err=-1');
+        Log::errlog($e);
+        header('Location: ../gare.php?err=-12');
     }
 
 } else{

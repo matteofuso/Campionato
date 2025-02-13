@@ -19,10 +19,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     try{
         Database::query("update gare set data = :data, tempo_migliore = :tempo_migliore where id = :id;", [':data' => $date, ':tempo_migliore' => $time, ':id' => $id]);
-        header('Location: ../gare.php?succ=2');
+        header('Location: ../gare.php?succ=10');
     } catch (Exception $e){
-        Log::errlog($e->getMessage(), "../logs/edit_gara.log");
-        header('Location: ../gare.php?err=1');
+        Log::errlog($e);
+        header('Location: ../gare.php?err=13');
     }
 } else{
     http_response_code(405);
